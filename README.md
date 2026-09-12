@@ -1,4 +1,4 @@
-# context-bench
+# context-bench (FastAPI, sentence-transformers, Jinja2)
 
 [![python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org)
 ![tests](https://img.shields.io/badge/tests-26%20passing-success)
