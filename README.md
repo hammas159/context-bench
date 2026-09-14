@@ -1,24 +1,47 @@
-# context-bench (FastAPI, sentence-transformers, Jinja2)
+<h1 align="center">context-bench</h1>
+<p align="center"><i>RAG vs CAG vs MAG, measured on real data with ground-truth answers - not argued about</i></p>
 
-[![python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org)
-![tests](https://img.shields.io/badge/tests-26%20passing-success)
-![llm](https://img.shields.io/badge/LLM-not%20required-success)
-![license](https://img.shields.io/badge/license-MIT-green)
+<p align="center">
+  <a href="#the-category-error-everyone-makes">The category error</a> &middot;
+  <a href="#the-number-nobody-puts-in-the-comparison">The missing number</a> &middot;
+  <a href="#what-it-measures-and-what-it-refuses-to">What it refuses to measure</a> &middot;
+  <a href="#the-trade-in-one-question">The trade</a> &middot;
+  <a href="#honest-limitations">Limitations</a> &middot;
+  <a href="#problems-hit-while-building-this">Problems hit</a>
+</p>
 
-**RAG vs CAG vs MAG, measured on real data with ground-truth answers — not argued about.**
-
-```
-CAG is cheaper than RAG up to 50 documents (~7,400 tokens). Past that, RAG wins.
-Without prompt caching, CAG loses from 10 documents on.
-```
-
-At 1,600 documents CAG costs **36× more per question** than RAG and buys **10 points** of
-answer coverage. Whether that is a good trade is your call — the point is that it is now a
-number instead of an opinion.
+<p align="center">
+  <a href="https://github.com/hammas159/context-bench/actions/workflows/ci.yml"><img src="https://github.com/hammas159/context-bench/actions/workflows/ci.yml/badge.svg" alt="ci"></a>
+  <img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="python">
+  <img src="https://img.shields.io/badge/data-ground--truth%20answers-success" alt="data">
+  <img src="https://img.shields.io/badge/stack-FastAPI%20%C2%B7%20sentence--transformers-orange" alt="stack">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
+</p>
 
 ---
 
 ## The category error everyone makes
+
+```mermaid
+flowchart LR
+    D["corpus of N documents"] --> R["RAG<br/>retrieve then generate"]
+    D --> C["CAG<br/>put it all in context"]
+    D --> M["MAG<br/>memory-augmented"]
+    R --> E["same questions,<br/>same ground truth"]
+    C --> E
+    M --> E
+    E --> T["accuracy AND token cost"]
+    T --> X{"where is the<br/>crossover?"}
+    X --> A["~50 documents<br/>with prompt caching"]
+    X --> B["~10 documents<br/>without it"]
+
+    style T fill:#2563eb,color:#fff
+```
+
+**The number nobody puts in the comparison is the crossover.** CAG is cheaper than RAG up
+to roughly 50 documents with prompt caching - and only 10 without it. Below that line the
+argument is settled; above it, it reverses.
+
 
 These four are constantly compared as rivals. Three of them are not:
 
@@ -158,6 +181,10 @@ division, so absent parts bill for nothing.
 it lost by 1.4 points. Reported as measured. The argument for hybrid still stands on
 robustness across query types — but on this corpus, with these retrievers, it is not the
 best choice, and the README says so rather than quietly showing only the hybrid number.
+
+## Keywords
+
+RAG &middot; CAG &middot; cache-augmented generation &middot; MAG &middot; memory-augmented generation &middot; retrieval-augmented generation &middot; long context &middot; prompt caching &middot; token cost &middot; context window &middot; benchmark &middot; ground truth evaluation &middot; sentence-transformers &middot; FastAPI &middot; LLM cost analysis &middot; crossover point
 
 ## License
 
