@@ -150,10 +150,7 @@ src/contextbench/
   retrieval.py    TF-IDF + BM25 + RRF, pure numpy, no model download
   strategies.py   RAG / CAG / MAG behind one interface, and the pricing model
   bench.py        the harness and the corpus-size sweep
-web/
-  app.py          FastAPI: sweep, ask and recall endpoints
-  templates/      one page
-  static/design.css   the shared design system for this portfolio
+run_bench.py      the sweep, and every number in this README
 ```
 
 ## Honest limitations
