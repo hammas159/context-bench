@@ -118,19 +118,29 @@ is unusually strong — a property of this corpus, stated rather than generalise
 uv sync --all-groups
 uv run pytest -q                            # 26 tests, no network
 uv run python run_bench.py                  # the full sweep
-uv run uvicorn web.app:app --port 8000      # the UI
 ```
 
 First run fetches SQuAD dev v1.1 (4.8 MB) and caches it. No GPU, no API key, no model
 download.
 
-### The UI
+---
 
-Open `http://localhost:8000`. The four numbers that decide the crossover — input price,
-cache price, output price, context window — are inputs, not assumptions. Change them and
-everything recomputes, including where the lines cross.
+## Input
 
-There is a **"no prompt caching"** preset, because that single toggle is the whole argument.
+![input](docs/images/input.png)
+
+## Output
+
+![output](docs/images/output.png)
+
+*The four prices at the top of the input are not decoration. Turning prompt caching off
+moves the crossover from 50 documents to 10 — a 3.5x cost swing at n=10 decided by a
+pricing flag rather than by anything about retrieval.*
+
+*CAG never loses on recall. It reaches 100% at every corpus size, right up to the point
+where it stops fitting in the context window at all.*
+
+---
 
 ## Layout
 
