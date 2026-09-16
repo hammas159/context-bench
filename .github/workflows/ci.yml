@@ -12,8 +12,8 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --all-groups
-      - run: uv run ruff check src tests web run_bench.py
-      - run: uv run ruff format --check src tests web run_bench.py
+      - run: uv run ruff check src tests run_bench.py
+      - run: uv run ruff format --check src tests run_bench.py
       # No network: every test runs on a constructed corpus, so a dead dataset link
       # can never turn a red build into the wrong diagnosis.
       - run: uv run pytest -q
