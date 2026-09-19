@@ -1,4 +1,4 @@
-<h1 align="center">context-bench</h1>
+<h1 align="center">context-bench (Python · NumPy · RAG/CAG/MAG)</h1>
 <p align="center"><i>RAG vs CAG vs MAG, measured on real data with ground-truth answers - not argued about</i></p>
 
 <p align="center">
